@@ -1,0 +1,22 @@
+parameters:
+  sourceFolder: 'terraforms'
+  targetFolder: '$(Build.ArtifactStagingDirectory)/terraforms'
+  flattenFolders: true
+  artifactPath: '$(Build.ArtifactStagingDirectory)/terraforms'
+  artifactName: 'flatten-terraforms' 
+
+steps:
+- task: CopyFiles@2
+  displayName: 'Copy Terraform Files to Artifact'
+  inputs:
+    SourceFolder: ${{ parameters.sourceFolder }}
+    Contents: '**/*'
+    TargetFolder: ${{ parameters.targetFolder }}
+    flattenFolders: ${{ parameters.flattenFolders }}
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Terraform Artifact'
+  inputs:
+    PathtoPublish: ${{ parameters.artifactPath }}
+    ArtifactName: ${{ parameters.artifactName }}
+    publishLocation: 'Container'

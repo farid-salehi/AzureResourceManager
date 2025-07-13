@@ -1,0 +1,22 @@
+parameters:
+  displayName: 'Terraform Plan'
+  command: 'plan'
+  destroy: false
+
+steps:
+- task: TerraformTaskV4@4
+  displayName: ${{ parameters.displayName }}
+  inputs:
+    provider: 'azurerm'
+    command: ${{ parameters.command }}
+    environmentServiceNameAzureRM: $(azure_sc)
+    workingDirectory: '$(TF_WORKING_DIR)'
+    ${{ if eq(parameters.destroy, true) }}:
+      commandOptions: >
+        -destroy
+        -var aks_sc=$(aks_sc)
+        -var acr=$(acr)
+    ${{ if eq(parameters.destroy, false) }}:
+      commandOptions: >
+        -var aks_sc=$(aks_sc)
+        -var acr=$(acr)

@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "terraforms", "terraforms", "{33FFAEA5-8BCF-4F1B-ACBA-A00733BD371D}"
+	ProjectSection(SolutionItems) = preProject
+		terraforms\backend.tf = terraforms\backend.tf
+		terraforms\outputs.tf = terraforms\outputs.tf
+		terraforms\providers.tf = terraforms\providers.tf
+		terraforms\variables.tf = terraforms\variables.tf
+		terraforms\versions.tf = terraforms\versions.tf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "main", "main", "{8C688D07-555A-445C-A2EA-F24F5EC4B7F4}"
+	ProjectSection(SolutionItems) = preProject
+		terraforms\main\aks.tf = terraforms\main\aks.tf
+		terraforms\main\app_configuration.tf = terraforms\main\app_configuration.tf
+		terraforms\main\container_registry.tf = terraforms\main\container_registry.tf
+		terraforms\main\resource_group.tf = terraforms\main\resource_group.tf
+		managed-identity.tf = managed-identity.tf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "helm", "helm", "{6DA7C876-A195-489A-AA1A-853331F84B79}"
+	ProjectSection(SolutionItems) = preProject
+		terraforms\main\helm\cert-manager-values.yaml = terraforms\main\helm\cert-manager-values.yaml
+		terraforms\main\helm\cert-manager.tf = terraforms\main\helm\cert-manager.tf
+		terraforms\main\helm\ingress-controller-nginx.tf = terraforms\main\helm\ingress-controller-nginx.tf
+		terraforms\main\helm\ingress-nginx-values.yaml = terraforms\main\helm\ingress-nginx-values.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{241B03A9-FBBC-440D-99B7-AF5F34A0E2FE}"
+	ProjectSection(SolutionItems) = preProject
+		pipelines\deploy.yml = pipelines\deploy.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{F05EB0BD-D068-409C-8629-F4573BB58661}"
+	ProjectSection(SolutionItems) = preProject
+		pipelines\templates\aks-deployment.yml = pipelines\templates\aks-deployment.yml
+		aks-manifests\cluster\cluster-issuer.yaml = aks-manifests\cluster\cluster-issuer.yaml
+		pipelines\templates\copy-publish-artifact.yml = pipelines\templates\copy-publish-artifact.yml
+		pipelines\templates\download-artifacts.yml = pipelines\templates\download-artifacts.yml
+		pipelines\templates\terraform-execute.yml = pipelines\templates\terraform-execute.yml
+		pipelines\templates\terraform-init.yml = pipelines\templates\terraform-init.yml
+		pipelines\templates\update-manifests-windows-agent.yml = pipelines\templates\update-manifests-windows-agent.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aks-manifests", "aks-manifests", "{243E9A5D-121D-4D06-BF79-8B37C105DF6D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "secure-api", "secure-api", "{194A71BE-6B67-416F-BE9C-965384CD69C1}"
+	ProjectSection(SolutionItems) = preProject
+		terraforms\secure-api\managed-identity.tf = terraforms\secure-api\managed-identity.tf
+		terraforms\secure-api\output.tf = terraforms\secure-api\output.tf
+		terraforms\secure-api\variables.tf = terraforms\secure-api\variables.tf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "default-app", "default-app", "{0E059612-14DB-4F09-ACC8-1484E9CD246C}"
+	ProjectSection(SolutionItems) = preProject
+		terraforms\default-app\managed-identity.tf = terraforms\default-app\managed-identity.tf
+		terraforms\default-app\output.tf = terraforms\default-app\output.tf
+		terraforms\default-app\variables.tf = terraforms\default-app\variables.tf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cluster", "cluster", "{E7E97891-20E5-4D79-8D5D-95C53032716E}"
+	ProjectSection(SolutionItems) = preProject
+		aks-manifests\cluster\certificate.yaml = aks-manifests\cluster\certificate.yaml
+		aks-manifests\cluster\cluster-issuer.yaml = aks-manifests\cluster\cluster-issuer.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8C688D07-555A-445C-A2EA-F24F5EC4B7F4} = {33FFAEA5-8BCF-4F1B-ACBA-A00733BD371D}
+		{6DA7C876-A195-489A-AA1A-853331F84B79} = {8C688D07-555A-445C-A2EA-F24F5EC4B7F4}
+		{F05EB0BD-D068-409C-8629-F4573BB58661} = {241B03A9-FBBC-440D-99B7-AF5F34A0E2FE}
+		{194A71BE-6B67-416F-BE9C-965384CD69C1} = {33FFAEA5-8BCF-4F1B-ACBA-A00733BD371D}
+		{0E059612-14DB-4F09-ACC8-1484E9CD246C} = {33FFAEA5-8BCF-4F1B-ACBA-A00733BD371D}
+		{E7E97891-20E5-4D79-8D5D-95C53032716E} = {243E9A5D-121D-4D06-BF79-8B37C105DF6D}
+	EndGlobalSection
+EndGlobal

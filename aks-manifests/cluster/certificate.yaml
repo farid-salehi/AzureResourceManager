@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: <SecrectName>
+  namespace: default
+spec:
+  secretName: <SecrectName>
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: <Host>
+  dnsNames:
+    - <Host>
+  duration: 8760h      
+  renewBefore: 720h   

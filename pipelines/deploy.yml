@@ -1,0 +1,110 @@
+trigger:
+- master
+
+pool:
+  name: 'FaridLocalPCAgent' 
+
+variables:
+- group: azure-resource-manager
+- name: TF_WORKING_DIR
+  value: '$(Pipeline.Workspace)/flatten-terraforms'
+
+stages:
+- stage: PublishArtifact
+  jobs:
+  - job: PublishArtifact
+    steps:
+
+    - template: templates/copy-publish-artifact.yml
+
+# ---------- INIT + PLAN ----------
+- stage: TerraformPlan
+  dependsOn: PublishArtifact
+  jobs:
+  - job: Plan
+    steps:
+
+    - template: templates/download-artifacts.yml
+
+    - template: templates/terraform-init.yml
+
+    - template: templates/terraform-execute.yml
+      parameters:
+        displayName: 'Terraform Plan'
+        command: 'plan'
+        destroy: false
+
+
+# ---------- APPLY ----------
+- stage: TerraformApply
+  dependsOn: TerraformPlan
+  condition: succeeded()
+  jobs:
+  - deployment: ApplyDeployment
+    environment: 'TerraformApplyEnv'
+    pool:
+      name: 'FaridLocalPCAgent'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+          - template: templates/terraform-init.yml
+  
+          - template: templates/terraform-execute.yml
+            parameters:
+              displayName: 'Terraform Apply'
+              command: 'apply'
+              destroy: false
+
+# ---------- Deploy AKS Cluster Issuer ----------
+- stage: DeployClusterIssuer
+  dependsOn: TerraformApply
+  condition: succeeded()
+  jobs:
+  - deployment: ApplyDeployment
+    environment: 'TerraformApplyEnv'
+    pool:
+      name: 'FaridLocalPCAgent'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+          - template: templates/aks-deployment.yml
+            
+# ---------- DESTROY PLAN ----------
+- stage: TerraformDestroyPlan
+  dependsOn: TerraformApply
+  condition: succeeded()
+  jobs:
+  - job: DestroyPlan
+    steps:
+
+    - template: templates/terraform-init.yml
+  
+    - template: templates/terraform-execute.yml
+      parameters:
+        displayName: 'Terraform Destroy Plan'
+        command: 'plan'
+        destroy: true
+
+# ---------- DESTROY ----------
+- stage: TerraformDestroy
+  dependsOn: TerraformDestroyPlan
+  condition: succeeded()
+  jobs:
+  - deployment: DestroyDeployment
+    environment: 'TerraformApplyEnv'
+    pool:
+      name: 'FaridLocalPCAgent'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: templates/terraform-init.yml
+
+          - template: templates/terraform-execute.yml
+            parameters:
+              displayName: 'Terraform Destroy Apply'
+              command: 'destroy'

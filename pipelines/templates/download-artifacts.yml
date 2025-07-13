@@ -1,0 +1,17 @@
+parameters:
+  artifact: 'flatten-terraforms'
+  path: '$(TF_WORKING_DIR)'
+
+steps:
+- task: DeleteFiles@1
+  displayName: 'Clean working directory'
+  inputs:
+    SourceFolder: '${{ parameters.path }}'
+    Contents: '**/*'
+    RemoveSourceFolder: true
+
+- task: DownloadPipelineArtifact@2
+  displayName: 'Download Terraform Artifact'
+  inputs:
+    artifact: ${{ parameters.artifact }}
+    path: '${{ parameters.path }}'

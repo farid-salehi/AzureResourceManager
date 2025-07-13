@@ -1,0 +1,25 @@
+parameters:
+  displayName: 'Deploy AKS Cluster Issuer'
+  manifestsFolder: 'aks-manifests/cluster'
+
+steps:
+
+- template: /pipelines/templates/update-manifests-windows-agent.yml
+  parameters:
+    manifestSelector:  ${{ parameters.manifestsFolder }}/*.yaml
+    manifestReplacements:
+      - from: <HOST>
+        to: $(host)
+      - from: <Email>
+        to: $(email)
+      - from: <SecrectName>
+        to: $(tls_secret_name)
+
+
+- task: KubernetesManifest@1
+  displayName: ${{ parameters.displayName }}
+  inputs:
+    action: 'deploy'
+    kubernetesServiceConnection: '$(aks_sc)' 
+    manifests: |
+      ${{ parameters.manifestsFolder }}/*.yaml

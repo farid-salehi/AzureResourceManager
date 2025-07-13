@@ -1,0 +1,25 @@
+parameters:
+  - name: manifestSelector
+    type: string
+
+  - name: manifestReplacements
+    type: object
+    default:
+      - from: '<REPLACE_FROM>'
+        to: '<REPLACE_TO>'
+
+steps:
+  - ${{ each replacement in parameters.manifestReplacements }}:
+    - task: PowerShell@2
+      displayName: Update manifest
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "Replacing '${{ replacement.from }}' with '${{ replacement.to }}' in files matching '${{ parameters.manifestSelector }}'"
+
+          Get-ChildItem -Path "${{ parameters.manifestSelector }}" -Recurse | ForEach-Object {
+            $content = Get-Content $_.FullName -Raw
+            $content = $content -replace [regex]::Escape("${{ replacement.from }}"), "${{ replacement.to }}"
+            Set-Content $_.FullName $content
+            Write-Host "Updated $($_.FullName)"
+          }
