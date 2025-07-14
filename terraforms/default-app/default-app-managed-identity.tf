@@ -10,7 +10,7 @@ resource "azurerm_role_assignment" "default_app_managed_identity_appconfig_acces
   principal_id         = azurerm_user_assigned_identity.default_app_managed_identity.principal_id
 }
 
-data "azurerm_kubernetes_cluster" "aks_data" {
+data "azurerm_kubernetes_cluster" "default_app_aks_data" {
   name                = azurerm_kubernetes_cluster.aks.name
   resource_group_name = azurerm_kubernetes_cluster.aks.resource_group_name
 }
@@ -20,6 +20,6 @@ resource "azurerm_federated_identity_credential" "default_app_aks_federated_cred
   resource_group_name = azurerm_resource_group.rg_dev_usa_east.name
   parent_id           = azurerm_user_assigned_identity.default_app_managed_identity.id
   audience            = ["api://AzureADTokenExchange"]
-  issuer              = data.azurerm_kubernetes_cluster.aks_data.oidc_issuer_url
+  issuer              = data.azurerm_kubernetes_cluster.default_app_aks_data.oidc_issuer_url
   subject             = "system:serviceaccount:default:${local.default_app.service_account_name}"
 }
