@@ -17,8 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "main", "main", "{8C688D07-5
 		terraforms\main\aks.tf = terraforms\main\aks.tf
 		terraforms\main\app_configuration.tf = terraforms\main\app_configuration.tf
 		terraforms\main\container_registry.tf = terraforms\main\container_registry.tf
-		terraforms\main\resource_group.tf = terraforms\main\resource_group.tf
 		managed-identity.tf = managed-identity.tf
+		terraforms\main\resource_group.tf = terraforms\main\resource_group.tf
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "helm", "helm", "{6DA7C876-A195-489A-AA1A-853331F84B79}"
@@ -49,16 +49,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aks-manifests", "aks-manife
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "secure-api", "secure-api", "{194A71BE-6B67-416F-BE9C-965384CD69C1}"
 	ProjectSection(SolutionItems) = preProject
-		terraforms\secure-api\managed-identity.tf = terraforms\secure-api\managed-identity.tf
-		terraforms\secure-api\output.tf = terraforms\secure-api\output.tf
-		terraforms\secure-api\variables.tf = terraforms\secure-api\variables.tf
+		terraforms\secure-api\secure-app-managed-identity.tf = terraforms\secure-api\secure-app-managed-identity.tf
+		terraforms\secure-api\secure-app-output.tf = terraforms\secure-api\secure-app-output.tf
+		terraforms\secure-api\secure-app-variables.tf = terraforms\secure-api\secure-app-variables.tf
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "default-app", "default-app", "{0E059612-14DB-4F09-ACC8-1484E9CD246C}"
 	ProjectSection(SolutionItems) = preProject
-		terraforms\default-app\managed-identity.tf = terraforms\default-app\managed-identity.tf
-		terraforms\default-app\output.tf = terraforms\default-app\output.tf
-		terraforms\default-app\variables.tf = terraforms\default-app\variables.tf
+		terraforms\default-app\default-app-managed-identity.tf = terraforms\default-app\default-app-managed-identity.tf
+		terraforms\default-app\default-app-output.tf = terraforms\default-app\default-app-output.tf
+		terraforms\default-app\default-app-variables.tf = terraforms\default-app\default-app-variables.tf
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cluster", "cluster", "{E7E97891-20E5-4D79-8D5D-95C53032716E}"
