@@ -17,7 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "main", "main", "{8C688D07-5
 		terraforms\main\aks.tf = terraforms\main\aks.tf
 		terraforms\main\app_configuration.tf = terraforms\main\app_configuration.tf
 		terraforms\main\container_registry.tf = terraforms\main\container_registry.tf
-		managed-identity.tf = managed-identity.tf
 		terraforms\main\resource_group.tf = terraforms\main\resource_group.tf
 	EndProjectSection
 EndProject
@@ -65,6 +64,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cluster", "cluster", "{E7E9
 	ProjectSection(SolutionItems) = preProject
 		aks-manifests\cluster\certificate.yaml = aks-manifests\cluster\certificate.yaml
 		aks-manifests\cluster\cluster-issuer.yaml = aks-manifests\cluster\cluster-issuer.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
